@@ -1,0 +1,10 @@
+{
+  "name": "Fin Messenger",
+  "id": "fin-messenger",
+  "version": "1.0.0",
+  "urls": {
+    "admin_ui": "https://abc.ngrok-free.app/zd_admin_ui",
+    "pull_url": "https://abc.ngrok-free.app/zd_pull_url",
+    "channelback_url": "https://abc.ngrok-free.app/zd_channelback_url"
+  }
+}
