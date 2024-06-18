@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Fin ZD demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      function reset() {
+        const cookies = document.cookie.split(";");
+
+        for (let i = 0; i < cookies.length; i++) {
+
+            const cookie = cookies[i];
+
+            const eqPos = cookie.indexOf("=");
+
+            const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+
+            // Set the cookie's expiration date to a past date to delete it
+
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+
+        }
+
+        window.localStorage.clear();
+        window.sessionStorage.clear();
+        window.location.reload();
+
+      }
+    </script>
+  </head>
+  <body class="p-6 flex flex-col flex-1 items-center justify-center min-h-screen bg-cover" style="background-image: url('https://downloads.intercomcdn.com/i/o/1051523575/8c16c6bb97ae791131ead20c/blur.jpg')">
+    <div class="flex flex-col space-y-2 items-center">
+      <div>
+        <img src="https://static.intercomassets.com/assets/default-avatars/fin/128-6a5eabbb84cc2b038b2afc6698ca0a974faf7adc9ea9f0fb3c3e78ac12543bc5.png" height="50" width="50"  >
+      </div>
+      <button class="bg-black text-white p-2 m-2 rounded hover:bg-opacity-75" onclick="reset()">Reset</button>
+    </div>
+    <style type='text/css'>
+      .embeddedServiceHelpButton .helpButton .uiButton {
+        background-color: #005290;
+        font-family: "Arial", sans-serif;
+      }
+      .embeddedServiceHelpButton .helpButton .uiButton:focus {
+        outline: 1px solid #005290;
+      }
+    </style>
+    
+    <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+    <script type='text/javascript'>
+      var initESW = function(gslbBaseURL) {
+        embedded_svc.settings.displayHelpButton = true; //Or false
+        embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
+    
+        //embedded_svc.settings.defaultMinimizedText = '...'; //(Defaults to Chat with an Expert)
+        //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
+    
+        //embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
+        //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
+    
+        // Settings for Chat
+        //embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
+          // Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
+          // Returns a valid button ID.
+        //};
+        //embedded_svc.settings.prepopulatedPrechatFields = {}; //Sets the auto-population of pre-chat form fields
+        //embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
+        //embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
+    
+        embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+        embedded_svc.settings.entryFeature = 'LiveAgent';
+    
+        embedded_svc.init(
+          'https://intercom46-dev-ed.develop.my.salesforce.com',
+          'https://intercom46-dev-ed.develop.my.salesforce-sites.com/liveAgentSetupFlow',
+          gslbBaseURL,
+          '00DQy000009DsVF',
+          'Chat_team',
+          {
+            baseLiveAgentContentURL: 'https://c.la1-core1.sfdc-cehfhs.salesforceliveagent.com/content',
+            deploymentId: '572Qy000005pSnN',
+            buttonId: '573Qy000001hSq5',
+            baseLiveAgentURL: 'https://d.la1-core1.sfdc-cehfhs.salesforceliveagent.com/chat',
+            eswLiveAgentDevName: 'Chat_team',
+            isOfflineSupportEnabled: false
+          }
+        );
+      };
+    
+      if (!window.embedded_svc) {
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://intercom46-dev-ed.develop.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+        s.onload = function() {
+          initESW(null);
+        };
+        document.body.appendChild(s);
+      } else {
+        initESW('https://service.force.com');
+      }
+    </script>
+  </body>
+</html>
